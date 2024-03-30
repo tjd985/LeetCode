@@ -14,7 +14,6 @@ function validCharacter(character) {
 
 const isPalindrome = function(s) {
   const lowerString = s.toLowerCase();
-  const stack = [];
   let editString = "";
   
   for (const character of lowerString) {
@@ -25,28 +24,17 @@ const isPalindrome = function(s) {
     editString += character;
   }
   
-  if (editString <= 1) {
-    return true;
-  }
-  
-  const middleIndex = Math.floor(editString.length / 2);
-  
-  for (let i = 0; i < editString.length; i++) {
-    if (editString.length % 2 !== 0 && i === middleIndex) {
-      continue;
+  for (let i = 0 ; i < Math.ceil(editString.length) / 2; i++) {
+    const head = i;
+    const tail = editString.length - i - 1;
+    
+    if (head >= tail) {
+      return true;
     }
     
-    if (i < middleIndex) {
-      stack.push(editString[i]);
-      
-      continue;
-    }
-    
-    if (stack[stack.length - 1] !== editString[i]) {
+    if (editString[head] !== editString[tail]) {
       return false;
     }
-    
-    stack.pop();
   }
   
   return true;
