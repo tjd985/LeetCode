@@ -14,15 +14,13 @@ const mergeTwoLists = function(list1, list2) {
   const valueList = [];
   
   if (!(list1 || list2)) {
-    return list1
+    return list1;
   }
   
   addValue(valueList, list1);
   addValue(valueList, list2);
   
   valueList.sort((a, b) => a - b);
-  
-  console.log(new ListNode(null));
   
   const headNode = new ListNode(valueList[0] ? valueList[0] : null);
   
