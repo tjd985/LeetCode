@@ -11,41 +11,37 @@
  * @return {ListNode}
  */
 const mergeTwoLists = function(list1, list2) {
-  const valueList = [];
+  const result = new ListNode();
+  let tail = result;
+
+  let l1 = list1;
+  let l2 = list2;
   
-  if (!(list1 || list2)) {
-    return list1;
-  }
-  
-  addValue(valueList, list1);
-  addValue(valueList, list2);
-  
-  valueList.sort((a, b) => a - b);
-  
-  const headNode = new ListNode(valueList[0] ? valueList[0] : null);
-  
-  for (let i = 1; i < valueList.length; i++) {
-    const newNode = new ListNode(valueList[i]);
-    let currentNode = headNode;
-    
-    while (true) {
-      if (!currentNode.next) {
-        currentNode.next = newNode;
-        
-        break;
-      }
+  while (l1 && l2) {
+    if (l1.val < l2.val) {
+      const newNode = new ListNode(l1.val);
       
-      currentNode = currentNode.next;
+      tail.next = newNode;
+      tail = tail.next;
+      
+      l1 = l1.next;
+    } else {
+      const newNode = new ListNode(l2.val);
+      
+      tail.next = newNode;
+      tail = tail.next;
+      
+      l2 = l2.next;
     }
   }
   
-  return headNode;
-};
-
-function addValue(valueList, targetList) {
-  while (targetList) {
-    valueList.push(targetList.val);
-    
-    targetList = targetList.next;
+  if (l1) {
+    tail.next = l1;
   }
+  
+  if (l2) {
+    tail.next = l2;
+  }
+  
+  return result.next;
 }
