@@ -8,18 +8,26 @@ const isAnagram = function(s, t) {
     return false;
   }
   
-  const characters = {};
+  const stringMap = new Map();
   
   for (const character of s) {
-    characters[character] = characters[character] ? characters[character] + 1 : 1;
+    const index = stringMap.get(character);
+    
+    if (index) {
+      stringMap.set(character, index + 1);
+    } else {
+      stringMap.set(character, 1);
+    }
   }
   
   for (const targetCharacter of t) {
-    characters[targetCharacter] -= 1;
+    const index = stringMap.get(targetCharacter);
     
-    if (isNaN(characters[targetCharacter]) || characters[targetCharacter] < 0) {
+    if (!index) {
       return false;
     }
+    
+    stringMap.set(targetCharacter, index - 1);
   }
   
   return true;
