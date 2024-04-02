@@ -1,3 +1,10 @@
+/**
+* @param {number[][]} image
+* @param {number} sr
+* @param {number} sc
+* @param {number} color
+* @return {number[][]}
+*/
 const floodFill = function(image, sr, sc, color) {
   const moveX = [-1, 0, 1, 0];
   const moveY = [0, -1, 0, 1];
@@ -5,11 +12,11 @@ const floodFill = function(image, sr, sc, color) {
        .fill(null)
        .map((value) => new Array(image[0].length)
        .fill(false));
-  const queue = [[sr, sc]];
+  const stack = [[sr, sc]];
   const startColor = image[sr][sc];
 
-  while(queue.length) {
-    const [currentX, currentY] = queue.shift();
+  while(stack.length) {
+    const [currentX, currentY] = stack.pop();
 
     isVisit[currentX][currentY] = true;
     image[currentX][currentY] = color;
@@ -28,7 +35,7 @@ const floodFill = function(image, sr, sc, color) {
         continue;
       }
 
-      queue.push([nextX, nextY]);
+      stack.push([nextX, nextY]);
     }
   }
 
