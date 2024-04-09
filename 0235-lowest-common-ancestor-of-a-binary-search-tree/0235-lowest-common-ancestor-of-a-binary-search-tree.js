@@ -42,8 +42,6 @@ const lowestCommonAncestor = function(root, p, q) {
         return root;
       }
       
-      console.log(pNode.depth, qNode.depth, pNode.val, qNode.val);
-      
       if (pNode.val === qNode.val) {
         return pNode;
       }
