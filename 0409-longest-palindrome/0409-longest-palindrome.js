@@ -1,16 +1,14 @@
-var longestPalindrome = function(s) {
-  let ans = 0;
+const longestPalindrome = function(s) {
+  let result = 0;
   const keys = {};
   
   for (const char of s) {
     keys[char] = (keys[char] || 0) + 1;
     
     if (keys[char] % 2 == 0) {
-      ans += 2;
+      result += 2;
     }
   }
   
-  console.log(ans);
-  
-  return s.length > ans ? ans + 1 : ans;
+  return s.length > result ? result + 1 : result;
 };
