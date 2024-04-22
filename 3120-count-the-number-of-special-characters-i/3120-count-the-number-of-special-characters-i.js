@@ -4,7 +4,7 @@
  */
 const numberOfSpecialChars = function(word) {
   const wordObject = {};
-  let result = new Set();
+  const result = new Set();
   
   function isUpperCase(character) {
     return character === character.toUpperCase();
