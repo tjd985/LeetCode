@@ -30,8 +30,6 @@ const lengthOfLongestSubstring = function(s) {
     if (currentString.length >= maxLength) {
         maxLength = currentString.length;
       }
-    
-    console.log(currentString, maxLength);
   }
   
   return maxLength ? maxLength : currentString.length;
