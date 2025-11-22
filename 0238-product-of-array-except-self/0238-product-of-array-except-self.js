@@ -21,13 +21,13 @@ var productExceptSelf = function(nums) {
     }
 
     beforeMultiple.push(beforeMultiple[i - 1] * nums[i - 1]);
-    afterMultiple.unshift(afterMultiple[0] * nums[nums.length - i]);
+    afterMultiple.push(afterMultiple[i - 1] * nums[nums.length - i]);
   }
 
   const answer = [];
 
   for (let i = 0; i < nums.length; i++) {
-    answer[i] = beforeMultiple[i] * afterMultiple[i];
+    answer[i] = beforeMultiple[i] * afterMultiple[nums.length - i - 1];
   }
 
   return answer;
