@@ -20,26 +20,24 @@ var largestPrime = function(n) {
   }
 
   const primeList = [];
-
+  const primeMap = {};
   isPrimeList.forEach((value, index) => {
     if (value) {
+      primeMap[index] = true;
       primeList.push(index);
   }});
 
   let answer = 0;
-  let sum = 0;
-
-  for (const prime of primeList) {
-    sum += prime;
-
-    if (sum > n) {
-      break;
-    }
-
-    if (isPrimeList[sum]) {
+  
+  primeList.reduce((acc, cur) => {
+    const sum = acc + cur;
+    
+    if (primeMap[sum] && sum <= n) {
       answer = sum;
     }
-  }
+    
+    return sum;
+  }, 0);
 
   return answer;
 };
