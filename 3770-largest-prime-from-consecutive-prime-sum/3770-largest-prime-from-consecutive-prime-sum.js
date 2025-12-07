@@ -1,6 +1,11 @@
+/**
+ * @param {number} n
+ * @return {number}
+ */
 var largestPrime = function(n) {
-  if (n < 2) return 0;
-  if (n === 2) return 2;
+  if (n === 2) {
+    return 2;
+  }
   
   const isPrimeList = new Array(n + 1).fill(true);
   isPrimeList[0] = false;
@@ -15,24 +20,26 @@ var largestPrime = function(n) {
   }
 
   const primeList = [];
+
   isPrimeList.forEach((value, index) => {
     if (value) {
       primeList.push(index);
-    }
-  });
+  }});
 
-  const primeSet = new Set(primeList);
   let answer = 0;
-  
-  primeList.reduce((acc, cur) => {
-    const sum = acc + cur;
-    
-    if (primeSet.has(sum) && sum <= n) {
+  let sum = 0;
+
+  for (const prime of primeList) {
+    sum += prime;
+
+    if (sum > n) {
+      break;
+    }
+
+    if (isPrimeList[sum]) {
       answer = sum;
     }
-    
-    return sum;
-  }, 0);
+  }
 
   return answer;
 };
