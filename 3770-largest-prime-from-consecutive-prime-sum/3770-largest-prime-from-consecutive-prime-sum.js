@@ -20,10 +20,9 @@ var largestPrime = function(n) {
   }
 
   const primeList = [];
-  const primeMap = {};
+
   isPrimeList.forEach((value, index) => {
     if (value) {
-      primeMap[index] = true;
       primeList.push(index);
   }});
 
@@ -32,7 +31,7 @@ var largestPrime = function(n) {
   primeList.reduce((acc, cur) => {
     const sum = acc + cur;
     
-    if (primeMap[sum] && sum <= n) {
+    if (isPrimeList[sum] && sum <= n) {
       answer = sum;
     }
     
