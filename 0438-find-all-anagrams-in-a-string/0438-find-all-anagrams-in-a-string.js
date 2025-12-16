@@ -18,8 +18,6 @@ var findAnagrams = function(s, p) {
   while (right < s.length) {
     const currentValue = s[right];
 
-    console.log(left, right, count);
-
     if (pMap[currentValue] > 0) {
       count--;
     }
