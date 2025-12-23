@@ -13,11 +13,7 @@ class TimeMap {
   }
 
   get(key: string, timestamp: number): string {
-    const list = this.timeMap.get(key);
-
-    if (!list) {
-      return '';
-    }
+    const list = this.timeMap.get(key) ?? [];
 
     for (let i = list.length - 1; i >= 0; i--) {
       if (list[i].timestamp <= timestamp) {
