@@ -1,31 +1,17 @@
 function productExceptSelf(nums: number[]): number[] {
-  const zeroIndexMap = new Map();
-  let hasZero = false;
+  const beforeList = [1];
+  const answer = [];
 
-  const multiple = nums.reduce((acc, cur, index) => {
-    if (!cur) {
-      zeroIndexMap.set(index,true);
-      hasZero = true;
-
-      return acc;
-    }
-
-    return acc * cur;
-  }, 1);
-
-  if (zeroIndexMap.size >= 2) {
-    return new Array(nums.length).fill(0);
+  for (let i = 1; i < nums.length; i++) {
+    beforeList[i] = beforeList[i - 1] * nums[i - 1];
   }
 
-  return nums.map((value, index) => {
-    if (!value) {
-      return multiple;
-    }
+  let right = 1;
 
-    if (hasZero) {
-      return 0;
-    }
+  for (let i = nums.length - 1; i >= 0; i--) {
+    answer[i] = beforeList[i] * right;
+    right *= nums[i];
+  }
 
-    return multiple / value;
-  });
+  return answer;
 };
