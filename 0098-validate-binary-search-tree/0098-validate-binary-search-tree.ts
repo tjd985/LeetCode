@@ -48,7 +48,7 @@ function isValidBST(root: TreeNode | null): boolean {
       const rightValue = currentNode.right.val;
       const newMin = currentValue;
 
-      if (rightValue >= newMin && rightValue < max) {
+      if (rightValue > newMin && rightValue < max) {
         rightResult = recursion(currentNode.right, newMin, max);
       } else {
         return false;
