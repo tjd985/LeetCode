@@ -1,34 +1,19 @@
 function minimumCost(cost1: number, cost2: number, costBoth: number, need1: number, need2: number): number {
-  const lumiscaron = { cost1, cost2, costBoth, need1, need2 };
+  const costMap = {};
+  costMap[need1] = cost1;
+  costMap[need2] = cost2;
   
-  let minCost = Infinity;
+  const max = Math.max(need1, need2);
+  const min = Math.min(need1, need2);
+  const maxCost = Math.max(cost1, cost2);
   
-  // 옵션 1: Type 3를 0개 구매
-  minCost = Math.min(minCost, 
-    lumiscaron.need1 * lumiscaron.cost1 + lumiscaron.need2 * lumiscaron.cost2
-  );
+  const allBoth = max * costBoth;
   
-  // 옵션 2: Type 3로 need1을 모두 커버
-  if (lumiscaron.need1 > 0) {
-    const cost = lumiscaron.need1 * lumiscaron.costBoth + 
-                 Math.max(0, lumiscaron.need2 - lumiscaron.need1) * lumiscaron.cost2;
-    minCost = Math.min(minCost, cost);
-  }
-  
-  // 옵션 3: Type 3로 need2를 모두 커버
-  if (lumiscaron.need2 > 0) {
-    const cost = lumiscaron.need2 * lumiscaron.costBoth + 
-                 Math.max(0, lumiscaron.need1 - lumiscaron.need2) * lumiscaron.cost1;
-    minCost = Math.min(minCost, cost);
-  }
-  
-  // 옵션 4: Type 3를 min(need1, need2)만큼만 구매
-  const bothCount = Math.min(lumiscaron.need1, lumiscaron.need2);
-  minCost = Math.min(minCost,
-    bothCount * lumiscaron.costBoth + 
-    (lumiscaron.need1 - bothCount) * lumiscaron.cost1 + 
-    (lumiscaron.need2 - bothCount) * lumiscaron.cost2
-  );
-  
-  return minCost;
-}
+  // 모두 costBoth로 사는 케이스와, 각각 따로 사는 케이스
+  let answer = Math.min(allBoth, need1 * cost1 + need2 * cost2);
+
+  // 적은 수 만큼 costBoth로 사고, 남은걸 따로 사는 케이스
+  answer = Math.min(answer, min * costBoth + Math.abs(need1 - need2) * costMap[max]);
+
+  return answer;
+};
