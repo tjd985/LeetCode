@@ -9,12 +9,12 @@ function leastInterval(tasks: string[], n: number): number {
   let time = 0;
   let completed = 0;
 
+  const list = Array.from(taskMap.entries()).sort((a, b) => b[1] - a[1]);
+
   while (true) {
     if (completed === tasks.length) {
       return time;
     }
-
-    const list = Array.from(taskMap.entries()).sort((a, b) => b[1] - a[1]);
 
     for (let i = 0; i < list.length; i++) {
       const task = list[i][0];
