@@ -14,9 +14,9 @@ function leastInterval(tasks: string[], n: number): number {
       return time;
     }
 
-    const list = Array.from(taskMap.entries()).sort((a, b) => a[1] - b[1]);
+    const list = Array.from(taskMap.entries()).sort((a, b) => b[1] - a[1]);
 
-    for (let i = list.length - 1; i >= 0; i--) {
+    for (let i = 0; i < list.length; i++) {
       const task = list[i][0];
       const canProcess = (idleMap[task] === undefined || idleMap[task] < time) && taskMap.get(task) > 0;
 
