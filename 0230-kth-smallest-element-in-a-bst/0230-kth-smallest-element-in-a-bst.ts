@@ -13,33 +13,19 @@
  */
 
 function kthSmallest(root: TreeNode | null, k: number): number {
-  let count = 0;
+  const inorderList: number[] = [];
 
   const inorder = (node) => {
-    if (node.left) {
-      const result = inorder(node.left);
-
-      if (result !== undefined) {
-        return result;
-      }
+    if (!node) {
+      return;
     }
 
-    count++;
-
-    if (count === k) {
-      return node.val;
-    }
-
-    if (node.right) {
-      const result = inorder(node.right);
-
-      if (result !== undefined) {
-        return result;
-      }
-    }
-
-    return;
+    inorder(node.left);
+    inorderList.push(node.val);
+    inorder(node.right);
   }
 
-  return inorder(root);
+  inorder(root);
+
+  return inorderList[k - 1];
 };
